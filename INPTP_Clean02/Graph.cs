@@ -185,25 +185,25 @@ namespace INPTP_Clean02.Graph
 
                 foreach (var item in graph.getNode(minNode).adjaencyList)
                 {
-                    Node<N, E> nn = item.opposite(graph.getNode(minNode));
+                    Node<N, E> nearestNode = item.opposite(graph.getNode(minNode));
 
-                    if (finalized.Contains(nn.data))
+                    if (finalized.Contains(nearestNode.data))
                         continue;
 
                     double ncost = minValue + costExtractor(item.data);
 
-                    if (costs.ContainsKey(nn.data))
+                    if (costs.ContainsKey(nearestNode.data))
                     {
-                        double ocost = costs[nn.data];
+                        double ocost = costs[nearestNode.data];
                         if (ncost < ocost)
                         {
-                            costs[nn.data] = ncost;
-                            prev[nn.data] = minNode;
+                            costs[nearestNode.data] = ncost;
+                            prev[nearestNode.data] = minNode;
                         }
                     } else
                     {
-                        costs.Add(nn.data, ncost);
-                        prev[nn.data] = minNode;
+                        costs.Add(nearestNode.data, ncost);
+                        prev[nearestNode.data] = minNode;
                     }
                 }
             }
